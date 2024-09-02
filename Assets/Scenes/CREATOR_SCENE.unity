@@ -422,9 +422,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1302639522}
   bulletPrefab: {fileID: 4210284325190420149, guid: 52dfa0a243baa7144be1119220248f48, type: 3}
-  playerLifes: 3
+  playerHealth: 3
   playerSpeed: 5
   rotationSpeed: 3
+  timerShoot: 3
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

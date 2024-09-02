@@ -19,8 +19,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int playerHealth = 3;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float timerShoot = 2f;
 
     // Non-Serialized
+    private float timer;
+    private bool canShoot = true;
     private Rigidbody2D rb;
     private DefaultControlls inputActions;
 
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        timer = timerShoot;
         inputActions.Basic.Fire.performed += Shoot;
         onHealthChanged.AddListener(CheckHealth);
     }
@@ -44,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Rotate();
+        CheckShootAble();
     }
 
     #endregion
@@ -67,9 +72,30 @@ public class PlayerController : MonoBehaviour
     #region Abilities
     private void Shoot(InputAction.CallbackContext action)
     {
-        GameObject bullet = Instantiate(bulletPrefab);
-        bullet.transform.position = shootPoint.position;
-        bullet.GetComponent<Rigidbody2D>().velocity = shootPoint.up * bullet.GetComponent<BulletBehaviour>().shootingSpeed;
+        if (canShoot)
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            bullet.transform.position = shootPoint.position;
+            bullet.GetComponent<Rigidbody2D>().velocity = shootPoint.up * bullet.GetComponent<BulletBehaviour>().shootingSpeed;
+
+            canShoot = false;
+        }
+    }
+
+    public void CheckShootAble()
+    {
+        if (!canShoot)
+        {
+            if (timer >= 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                timer = timerShoot;
+                canShoot = true;
+            }
+        }
     }
     #endregion
 
