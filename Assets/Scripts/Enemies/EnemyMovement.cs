@@ -46,13 +46,17 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("LEAVE COLLISION ENTER: "+leaveCollision);
-        if (other.gameObject.CompareTag("Bound"))
-        {
-            var speed = LastVelocity.magnitude;
+        // Debug.Log("LEAVE COLLISION ENTER: "+leaveCollision);
+        // if (other.gameObject.CompareTag("Bound"))
+        // {
+        //     var speed = LastVelocity.magnitude;
+        //     var direction = Vector3.Reflect(LastVelocity.normalized, other.contacts[0].normal);
+        //     rb.velocity = direction * Mathf.Max(speed, 0f);
+        //     //CheckBounds();
+        // }
+
+        var speed = LastVelocity.magnitude;
             var direction = Vector3.Reflect(LastVelocity.normalized, other.contacts[0].normal);
             rb.velocity = direction * Mathf.Max(speed, 0f);
-            //CheckBounds();
-        }
     }
 }

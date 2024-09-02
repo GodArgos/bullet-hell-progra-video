@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 123483537}
   - component: {fileID: 123483538}
   - component: {fileID: 123483539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 178884116}
   - component: {fileID: 178884117}
   - component: {fileID: 178884118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 179078041}
   - component: {fileID: 179078042}
   - component: {fileID: 179078043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Diamond Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -759,7 +759,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
