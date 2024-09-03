@@ -1,7 +1,8 @@
 using UnityEngine;
+using System.Collections;
 
-public class EnemyEnergy : MonoBehaviour {
-
+public class EnemyManager : MonoBehaviour
+{
     public GameObject[] enemyBases;
     public float spawnTime = 2f;
     public float speed = 2f;
@@ -9,16 +10,46 @@ public class EnemyEnergy : MonoBehaviour {
 
     private float screenMaxWidth;
     private float screenMaxHeight;
+    private bool isSpawning = true;
+    private Coroutine spawnCoroutine;
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 0, spawnTime);
-        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-        screenMaxWidth = screenBounds.x * 2;
-        screenMaxHeight = screenBounds.y * 2;
+        SetScreenBounds();
+
         foreach (var enemy in enemyBases)
         {
             enemy.SetActive(false);
+        }
+
+        spawnTime = GameManager.Instance.spawnTime;
+        spawnCoroutine = StartCoroutine(SpawnEnemyCoroutine());
+    }
+
+    void Update()
+    {
+        float newSpawnTime = GameManager.Instance.spawnTime;
+
+        if (newSpawnTime != spawnTime)
+        {
+            spawnTime = newSpawnTime;
+            RestartSpawning();
+        }
+    }
+
+    private void SetScreenBounds()
+    {
+        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        screenMaxWidth = screenBounds.x * 2;
+        screenMaxHeight = screenBounds.y * 2;
+    }
+
+    IEnumerator SpawnEnemyCoroutine()
+    {
+        while (isSpawning)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(spawnTime);
         }
     }
 
@@ -28,18 +59,11 @@ public class EnemyEnergy : MonoBehaviour {
         GameObject enemyPrefab = enemyBases[enemyTypeIndex];
 
         GameObject enemy = Instantiate(enemyPrefab);
-
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
-
         enemyMovement.speed = speed;
-        enemyMovement.rotationSpeed = rotationSpeed;
-        
-        Vector3 spawnPosition = GetRandomSpawnPosition(enemy.GetComponent<SpriteRenderer>().bounds.size);
-        enemy.transform.position = spawnPosition;
 
-        Color randomColor = new Color(Random.value, Random.value, Random.value);
-        enemy.GetComponent<SpriteRenderer>().color = randomColor;
-
+        enemy.transform.position = GetRandomSpawnPosition(enemy.GetComponent<SpriteRenderer>().bounds.size);
+        enemy.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
 
         enemy.SetActive(true);
     }
@@ -51,4 +75,30 @@ public class EnemyEnergy : MonoBehaviour {
         return new Vector3(xPos, yPos, 0);
     }
 
+    public void StopSpawning()
+    {
+        isSpawning = false;
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+        }
+    }
+
+    public void StartSpawning()
+    {
+        if (!isSpawning)
+        {
+            isSpawning = true;
+            spawnCoroutine = StartCoroutine(SpawnEnemyCoroutine());
+        }
+    }
+
+    private void RestartSpawning()
+    {
+        if (isSpawning)
+        {
+            StopSpawning();
+            StartSpawning();
+        }
+    }
 }

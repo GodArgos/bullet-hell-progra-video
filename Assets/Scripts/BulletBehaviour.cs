@@ -20,6 +20,7 @@ public class BulletBehaviour : MonoBehaviour
             // Agregar una kill al puntaje total
 
             //
+            GameManager.Instance.killCount++;
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

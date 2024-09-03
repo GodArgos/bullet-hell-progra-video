@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -16,7 +15,7 @@ public class PlayerController : MonoBehaviour
     // Serialized 
     [Header("Variables")]
     [Space(10)]
-    [SerializeField] private int playerHealth = 3;
+    public int playerHealth = 3;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float timerShoot = 2f;
@@ -102,19 +101,32 @@ public class PlayerController : MonoBehaviour
     #region Health Logic
     public void CheckHealth()
     {
-        if (playerHealth > 0)
+        if (playerHealth > 1)
         {
+            playerHealth--;
+
             // EXPLOSIÓN
 
             //
-
+            StartCoroutine(WaitForRestart());
             transform.position = new Vector3(0f, 0f, 0f);
         }
         else
         {
             Destroy(gameObject);
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
         }
-    } 
+    }
+
+    IEnumerator WaitForRestart()
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(2f);
+        Time.timeScale = 1f;
+    }
       
     #endregion
 
