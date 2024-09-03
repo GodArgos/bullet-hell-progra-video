@@ -63,7 +63,16 @@ public class EnemyManager : MonoBehaviour
         enemyMovement.speed = speed;
 
         enemy.transform.position = GetRandomSpawnPosition(enemy.GetComponent<SpriteRenderer>().bounds.size);
-        enemy.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+        /*Color randomColor = new Color(Random.value, Random.value, Random.value);
+        enemy.GetComponent<SpriteRenderer>().color = randomColor;*/
+        enemy.GetComponent<SpriteRenderer>().color = new Color(Random.value,Random.value,Random.value);
+
+        // Pasar el color al script de explosión
+        /*Explosion explosionScript = enemy.GetComponent<Explosion>();
+        if (explosionScript != null)
+        {
+            explosionScript.enemyColor = randomColor;
+        }*/
 
         enemy.SetActive(true);
     }

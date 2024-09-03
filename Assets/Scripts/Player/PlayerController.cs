@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
 
     [Space(15)]
+    [SerializeField] private Explosion explosionScript;
 
     // Serialized 
     [Header("Variables")]
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         timer = timerShoot;
         inputActions.Basic.Fire.performed += Shoot;
         onHealthChanged.AddListener(CheckHealth);
+        explosionScript = GetComponent<Explosion>();
     }
 
     void Update()
@@ -105,14 +107,20 @@ public class PlayerController : MonoBehaviour
         {
             playerHealth--;
 
-            // EXPLOSIÓN
+            if (explosionScript != null)
+            {
+                explosionScript.Explode();
+            }
 
-            //
             StartCoroutine(WaitForRestart());
             transform.position = new Vector3(0f, 0f, 0f);
         }
         else
         {
+            if (explosionScript != null)
+            {
+                explosionScript.Explode();
+            }
             Destroy(gameObject);
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
