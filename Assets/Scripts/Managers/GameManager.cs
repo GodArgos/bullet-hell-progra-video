@@ -23,7 +23,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Global Variables")]
     [Space(10)]
-    public int killCount = 0;
+    public float playerSpeed = 5f;
+    public int playerLifes = 3;
     public float spawnTime = 5f;
     public float enemyRotation = 2f;
+    public float explosionSpeed = 1f;
+    public float explosionRadius = 1f;
+    public float explosionDuration = 3f;
+    public int killCount = 0;
 }
