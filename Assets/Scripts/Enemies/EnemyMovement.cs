@@ -31,4 +31,10 @@ public class EnemyMovement : MonoBehaviour
             rb.velocity = direction * Mathf.Max(speed, 0f);
         } 
     }
+
+    public void EnemyDestroy()
+    {
+        GetComponent<Explosion>().Explode(GetComponent<SpriteRenderer>().color);
+        Destroy(gameObject);
+    }
 }

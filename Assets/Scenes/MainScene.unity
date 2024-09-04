@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 123483537}
   - component: {fileID: 123483538}
   - component: {fileID: 123483539}
+  - component: {fileID: 123483540}
   m_Layer: 6
   m_Name: Circle Enemy
   m_TagString: Enemy
@@ -463,6 +464,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &123483540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123483533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701a3ee24acae6b43bf8009dc7982ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circlePrefab: {fileID: 8633792788221536010, guid: 291b68b2decfd9c48a12d4671319acb0, type: 3}
+  explosionSpeed: 5
+  explosionRadius: 0.5
+  explosionTime: 2
+  enemyColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &178884112
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +495,7 @@ GameObject:
   - component: {fileID: 178884116}
   - component: {fileID: 178884117}
   - component: {fileID: 178884118}
+  - component: {fileID: 178884119}
   m_Layer: 6
   m_Name: Cylinder Enemy
   m_TagString: Enemy
@@ -642,6 +661,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &178884119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178884112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701a3ee24acae6b43bf8009dc7982ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circlePrefab: {fileID: 8633792788221536010, guid: 291b68b2decfd9c48a12d4671319acb0, type: 3}
+  explosionSpeed: 5
+  explosionRadius: 0.5
+  explosionTime: 2
+  enemyColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &179078037
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +692,7 @@ GameObject:
   - component: {fileID: 179078041}
   - component: {fileID: 179078042}
   - component: {fileID: 179078043}
+  - component: {fileID: 179078044}
   m_Layer: 6
   m_Name: Diamond Enemy
   m_TagString: Enemy
@@ -839,6 +876,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &179078044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179078037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701a3ee24acae6b43bf8009dc7982ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circlePrefab: {fileID: 8633792788221536010, guid: 291b68b2decfd9c48a12d4671319acb0, type: 3}
+  explosionSpeed: 5
+  explosionRadius: 0.5
+  explosionTime: 2
+  enemyColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &438067983
 GameObject:
   m_ObjectHideFlags: 0

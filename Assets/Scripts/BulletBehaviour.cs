@@ -22,15 +22,7 @@ public class BulletBehaviour : MonoBehaviour
             //
             GameManager.Instance.killCount++;
             // Obtener el script de explosión del enemigo
-            Explosion explosionScript = collision.gameObject.GetComponent<Explosion>();
-            if (explosionScript != null)
-            {
-                Debug.Log("Llamado a explode");
-                explosionScript.Explode(); // Llamar al método Explode
-            }
-
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<EnemyMovement>().EnemyDestroy();
         }
     }
 }

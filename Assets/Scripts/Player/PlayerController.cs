@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
             if (explosionScript != null)
             {
-                explosionScript.Explode();
+                explosionScript.Explode(GetComponent<SpriteRenderer>().color);
             }
 
             StartCoroutine(WaitForRestart());
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             if (explosionScript != null)
             {
-                explosionScript.Explode();
+                explosionScript.Explode(GetComponent<SpriteRenderer>().color);
             }
             Destroy(gameObject);
 #if UNITY_EDITOR
