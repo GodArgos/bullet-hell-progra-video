@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     [Header("Variables")]
     [Space(10)]
     public int playerHealth = 3;
-    [SerializeField] private float playerSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float timerShoot = 2f;
 
@@ -25,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool canShoot = true;
     private Rigidbody2D rb;
     private DefaultControlls inputActions;
+    private int instanceLifes;
 
     // Events
     public UnityEvent onHealthChanged;
@@ -41,10 +41,19 @@ public class PlayerController : MonoBehaviour
         timer = timerShoot;
         inputActions.Basic.Fire.performed += Shoot;
         onHealthChanged.AddListener(CheckHealth);
+
+        instanceLifes = GameManager.Instance.playerLifes;
+        playerHealth = instanceLifes;
     }
 
     void Update()
     {
+        if(instanceLifes != GameManager.Instance.playerLifes)
+        {
+            instanceLifes = GameManager.Instance.playerLifes;
+            playerHealth = instanceLifes;
+        }
+
         Move();
         Rotate();
         CheckShootAble();
@@ -56,7 +65,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector2 input = inputActions.Basic.Move.ReadValue<Vector2>();
-        rb.velocity = input.normalized * playerSpeed;
+        rb.velocity = input.normalized * GameManager.Instance.playerSpeed;
     }   
 
     private void Rotate()
@@ -105,7 +114,7 @@ public class PlayerController : MonoBehaviour
         {
             playerHealth--;
 
-            // EXPLOSIÓN
+            // EXPLOSIï¿½N
 
             //
             StartCoroutine(WaitForRestart());
