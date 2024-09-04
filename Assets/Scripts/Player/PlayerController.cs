@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         instanceLifes = GameManager.Instance.playerLifes;
         playerHealth = instanceLifes;
     }
-z
+
     void Update()
     {
         if(instanceLifes != GameManager.Instance.playerLifes)
