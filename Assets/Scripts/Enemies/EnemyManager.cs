@@ -28,12 +28,23 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        float newSpawnTime = GameManager.Instance.spawnTime;
-
-        if (newSpawnTime != spawnTime)
+        if (!GameManager.Instance.playerHasDied)
         {
-            spawnTime = newSpawnTime;
-            RestartSpawning();
+            float newSpawnTime = GameManager.Instance.spawnTime;
+
+            if (newSpawnTime != spawnTime)
+            {
+                spawnTime = newSpawnTime;
+                RestartSpawning();
+            }
+            else
+            {
+                StartSpawning();
+            }
+        }
+        else
+        {
+            StopSpawning();
         }
     }
 

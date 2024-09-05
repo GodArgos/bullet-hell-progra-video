@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -56,9 +57,12 @@ public class PlayerController : MonoBehaviour
             playerHealth = instanceLifes;
         }
 
-        Move();
-        Rotate();
-        CheckShootAble();
+        if (!GameManager.Instance.playerHasDied)
+        {
+            Move();
+            Rotate();
+            CheckShootAble();
+        } 
     }
 
     #endregion
@@ -82,7 +86,7 @@ public class PlayerController : MonoBehaviour
     #region Abilities
     private void Shoot(InputAction.CallbackContext action)
     {
-        if (canShoot)
+        if (canShoot && !GameManager.Instance.playerHasDied)
         {
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.transform.position = shootPoint.position;
@@ -123,7 +127,7 @@ public class PlayerController : MonoBehaviour
             // EXPLOSI�N
 
             StartCoroutine(WaitForRestart());
-            transform.position = new Vector3(0f, 0f, 0f);
+            
         }
         else
         {
@@ -141,9 +145,16 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator WaitForRestart()
     {
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(2f);
-        Time.timeScale = 1f;
+        GameManager.Instance.playerHasDied = true;
+        rb.position = Vector2.zero;
+        rb.velocity = Vector2.zero;
+        rb.rotation = 0f;
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        yield return new WaitForSecondsRealtime(GameManager.Instance.explosionDuration + 0.5f);
+
+        GetComponent<SpriteRenderer>().enabled = true;
+        GameManager.Instance.playerHasDied = false;
     }
       
     #endregion

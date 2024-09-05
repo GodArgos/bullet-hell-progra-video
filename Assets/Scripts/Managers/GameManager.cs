@@ -27,8 +27,9 @@ public class GameManager : MonoBehaviour
     public int playerLifes = 3;
     public float spawnTime = 5f;
     public float enemyRotation = 2f;
-    public float explosionSpeed = 1f;
+    public float explosionSpeed = 5f;
     public float explosionRadius = 1f;
-    public float explosionDuration = 3f;
+    public float explosionDuration = 2f;
     public int killCount = 0;
+    [HideInInspector] public bool playerHasDied = false;
 }

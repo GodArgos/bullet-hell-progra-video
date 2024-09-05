@@ -247,6 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 93039886}
   - component: {fileID: 93039885}
+  - component: {fileID: 93039887}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -266,9 +267,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a631f0dd3c34449832396a8cd086c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killCount: 0
+  playerSpeed: 5
+  playerLifes: 3
   spawnTime: 5
   enemyRotation: 2
+  explosionSpeed: 1
+  explosionRadius: 1
+  explosionDuration: 3
+  killCount: 0
 --- !u!4 &93039886
 Transform:
   m_ObjectHideFlags: 0
@@ -284,6 +290,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &93039887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93039884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5721b571620db714fbd56fc3fe60dd1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &123483533
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +499,7 @@ MonoBehaviour:
   explosionRadius: 0.5
   explosionTime: 2
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
+  size: 0.5
 --- !u!1 &178884112
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,6 +697,7 @@ MonoBehaviour:
   explosionRadius: 0.5
   explosionTime: 2
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
+  size: 0.5
 --- !u!1 &179078037
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +913,7 @@ MonoBehaviour:
   explosionRadius: 0.5
   explosionTime: 2
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
+  size: 0.5
 --- !u!1 &438067983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1645,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4210284325190420149, guid: 52dfa0a243baa7144be1119220248f48, type: 3}
   explosionScript: {fileID: 0}
   playerHealth: 3
-  playerSpeed: 5
   rotationSpeed: 3
   timerShoot: 0.5
   onHealthChanged:
@@ -1790,6 +1810,7 @@ MonoBehaviour:
   explosionRadius: 1
   explosionTime: 2
   enemyColor: {r: 1, g: 1, b: 1, a: 0}
+  size: 0.5
 --- !u!1 &1220681687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,6 +1894,7 @@ MonoBehaviour:
   explosionRadius: 1
   explosionTime: 2
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
+  size: 0.5
 --- !u!1 &2022064789
 GameObject:
   m_ObjectHideFlags: 0

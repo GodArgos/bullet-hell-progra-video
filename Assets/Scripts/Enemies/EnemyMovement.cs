@@ -6,6 +6,10 @@ public class EnemyMovement : MonoBehaviour
     Rigidbody2D rb;
     Vector3 LastVelocity;
 
+    // Saved variables when player dies
+    private Vector2 savedVelocity;
+    private bool alreadyStop = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -14,8 +18,31 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        LastVelocity = rb.velocity;
-        rb.rotation += GameManager.Instance.enemyRotation;
+        if (!GameManager.Instance.playerHasDied)
+        {
+            if (rb.velocity == Vector2.zero)
+            {
+                LastVelocity = savedVelocity;
+                rb.velocity = savedVelocity;
+            }
+            else
+            {
+                LastVelocity = rb.velocity;
+            }
+
+            rb.rotation += GameManager.Instance.enemyRotation;
+        }
+        else
+        {
+            if (!alreadyStop)
+            {
+                savedVelocity = rb.velocity;
+                alreadyStop = true;
+            }
+            
+            rb.velocity = Vector2.zero;
+            rb.rotation = 0;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

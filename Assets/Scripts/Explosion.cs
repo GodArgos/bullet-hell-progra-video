@@ -22,7 +22,7 @@ public class Explosion : MonoBehaviour
         {
             // Calcular la posicion de los 8 circulos en la explosion
             float angle = i * Mathf.PI / 4; // Ángulos en radianes (45 grados entre cada circulo)
-            Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * explosionRadius;
+            Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * GameManager.Instance.explosionRadius;
 
             // Instanciar el circulo en la posición calculada
             GameObject explosionCircle = Instantiate(circlePrefab, spawnPos, Quaternion.identity);
@@ -33,11 +33,11 @@ public class Explosion : MonoBehaviour
             Rigidbody2D rb = explosionCircle.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.AddForce(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * explosionSpeed, ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * GameManager.Instance.explosionSpeed, ForceMode2D.Impulse);
             }
 
             // Destruir el circulo despues de explosionTime segundos
-            Destroy(explosionCircle, explosionTime);
+            Destroy(explosionCircle, GameManager.Instance.explosionDuration);
         }
 
         // Destruir el objeto que exploto (por ejemplo, un enemigo o jugador)
