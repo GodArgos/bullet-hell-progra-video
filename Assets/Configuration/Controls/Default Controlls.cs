@@ -53,6 +53,15 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""36118b19-35eb-4bbd-a53e-197963e92f25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
                     ""action"": ""Mouse Position"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d684ce1a-6e67-4d79-b893-35f65fb868d5"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -204,6 +224,7 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
         m_Basic_Move = m_Basic.FindAction("Move", throwIfNotFound: true);
         m_Basic_Fire = m_Basic.FindAction("Fire", throwIfNotFound: true);
         m_Basic_MousePosition = m_Basic.FindAction("Mouse Position", throwIfNotFound: true);
+        m_Basic_Restart = m_Basic.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,6 +289,7 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Basic_Move;
     private readonly InputAction m_Basic_Fire;
     private readonly InputAction m_Basic_MousePosition;
+    private readonly InputAction m_Basic_Restart;
     public struct BasicActions
     {
         private @DefaultControlls m_Wrapper;
@@ -275,6 +297,7 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Basic_Move;
         public InputAction @Fire => m_Wrapper.m_Basic_Fire;
         public InputAction @MousePosition => m_Wrapper.m_Basic_MousePosition;
+        public InputAction @Restart => m_Wrapper.m_Basic_Restart;
         public InputActionMap Get() { return m_Wrapper.m_Basic; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -293,6 +316,9 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         private void UnregisterCallbacks(IBasicActions instance)
@@ -306,6 +332,9 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         public void RemoveCallbacks(IBasicActions instance)
@@ -337,5 +366,6 @@ public partial class @DefaultControlls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

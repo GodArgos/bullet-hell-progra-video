@@ -11,8 +11,6 @@ public class Game_Gui : MonoBehaviour
     private string explosionSpeedText;
     private string explosionRadiusText;
     private string explosionDurationText;
-    private int kills = 0;
-    private bool isGameOver = false;
 
     private void Start()
     {
@@ -68,7 +66,7 @@ public class Game_Gui : MonoBehaviour
             float.TryParse(explosionSpeedText, out float explosionSpeed);
             GameManager.Instance.explosionSpeed = explosionSpeed;
 
-            GUI.Label(new Rect(20, 190, 130, 20), "Radio Explosión:");  
+            GUI.Label(new Rect(20, 190, 130, 20), "Radio Explosión:");
             explosionRadiusText = GUI.TextField(new Rect(150, 190, 70, 20), explosionRadiusText);
             float.TryParse(explosionRadiusText, out float explosionRadius);
             GameManager.Instance.explosionRadius = explosionRadius;
@@ -78,29 +76,6 @@ public class Game_Gui : MonoBehaviour
             float.TryParse(explosionDurationText, out float explosionDuration);
             GameManager.Instance.explosionDuration = explosionDuration;
         }
-
-        // Mostrar el número de kills en la parte superior derecha
-        GUI.Label(new Rect(Screen.width - 100, 10, 90, 20), "Kills: " + kills);
-
-        // Si el juego ha terminado, muestra la pantalla final
-        if (isGameOver)
-        {
-            OnGameOver();
-        }
     }
 
-    void OnEnemyKilled()
-    {
-        // Incrementar el número de kills
-        kills++;
-    }
-
-    void OnGameOver()
-    {
-        // Muestra la pantalla de finalización del juego
-        GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-        GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 100, 200, 30), $"Juego Terminado");
-        GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 50, 200, 30), $"Kills: {kills}");
-        GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 20, 200, 30), $"Duración del Juego: {Time.timeSinceLevelLoad / 60f:F2} minutos");
-    }
 }

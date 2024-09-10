@@ -136,9 +136,8 @@ public class PlayerController : MonoBehaviour
                 explosionScript.Explode(GetComponent<SpriteRenderer>().color);
             }
             Destroy(gameObject);
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
+
+            GameManager.Instance.FinalDeath();
 
         }
     }
