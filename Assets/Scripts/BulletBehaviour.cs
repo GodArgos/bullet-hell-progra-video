@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -21,8 +23,18 @@ public class BulletBehaviour : MonoBehaviour
 
             //
             GameManager.Instance.killCount++;
-            // Obtener el script de explosión del enemigo
-            collision.gameObject.GetComponent<EnemyMovement>().EnemyDestroy();
+            // Obtener el script de explosiï¿½n del enemigo
+
+            if (collision.gameObject.TryGetComponent(out EnemyMovement script))
+            {
+                script.EnemyDestroy();
+            }
+            else
+            {
+                collision.gameObject.GetComponent<ShurikenFragmentEnemy>().EnemyDestroy();
+            }
+
+            Destroy(gameObject);
         }
     }
 }
