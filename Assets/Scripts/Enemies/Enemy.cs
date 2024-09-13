@@ -65,6 +65,7 @@ public  class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerController>().onHealthChanged.Invoke();
+            Destroy(gameObject);
         }
         else
         {

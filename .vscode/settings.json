@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "bullet-hell-progra-video.sln"
+    "dotnet.defaultSolution": "hell-bullet.sln"
 }
