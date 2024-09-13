@@ -25,9 +25,21 @@ public class BulletBehaviour : MonoBehaviour
             GameManager.Instance.killCount++;
             // Obtener el script de explosi�n del enemigo
 
-            if (collision.gameObject.TryGetComponent(out EnemyMovement script))
+            if (collision.gameObject.TryGetComponent(out CircleEnemy scriptC))
             {
-                script.EnemyDestroy();
+                scriptC.EnemyDestroy();
+            }
+            else if(collision.gameObject.TryGetComponent(out DiamondEnemy scriptD))
+            {
+                scriptD.EnemyDestroy();
+            }
+            else if (collision.gameObject.TryGetComponent(out CylinderEnemy scriptCy))
+            {
+                scriptCy.EnemyDestroy();
+            }
+            else if (collision.gameObject.TryGetComponent(out BossEnemy scriptB))
+            {
+                scriptB.EnemyDestroy();
             }
             else
             {

@@ -70,8 +70,37 @@ public class EnemyManager : MonoBehaviour
         GameObject enemyPrefab = enemyBases[enemyTypeIndex];
 
         GameObject enemy = Instantiate(enemyPrefab);
-        EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
-        enemyMovement.speed = speed;
+        //EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
+        //enemyMovement.speed = speed;
+        enemy.SetActive(true);
+        if (enemy.TryGetComponent(out CircleEnemy circleEnemy))
+        {
+            circleEnemy.speed = this.speed;
+            circleEnemy.Name = "CircleEnemy";
+            circleEnemy.rotationSpeed = GameManager.Instance.enemyRotation;
+            circleEnemy.enemyClone = enemyPrefab;
+        }
+        else if (enemy.TryGetComponent(out DiamondEnemy diamondEnemy))
+        {
+            diamondEnemy.speed = this.speed;
+            diamondEnemy.Name = "DiamondEnemy";
+            diamondEnemy.rotationSpeed = GameManager.Instance.enemyRotation;
+            diamondEnemy.enemyClone = enemyPrefab;
+        }
+        else if (enemy.TryGetComponent(out CylinderEnemy cylinderEnemy))
+        {
+            cylinderEnemy.speed = this.speed;
+            cylinderEnemy.Name = "CyllinderEnemy";
+            cylinderEnemy.rotationSpeed = GameManager.Instance.enemyRotation;
+            cylinderEnemy.enemyClone = enemyPrefab;
+        }
+        else if (enemy.TryGetComponent(out BossEnemy bossEnemy))
+        {
+            bossEnemy.speed = speed;
+            bossEnemy.Name = "BossEnemy";
+            bossEnemy.rotationSpeed = GameManager.Instance.enemyRotation;
+            bossEnemy.enemyClone = enemyPrefab;
+        }
 
         enemy.transform.position = GetRandomSpawnPosition(enemy.GetComponent<SpriteRenderer>().bounds.size);
         Color randomColor = new Color(Random.value, Random.value, Random.value);
@@ -85,7 +114,7 @@ public class EnemyManager : MonoBehaviour
             explosionScript.enemyColor = randomColor;
         }
 
-        enemy.SetActive(true);
+        
     }
 
     Vector3 GetRandomSpawnPosition(Vector3 enemySize)

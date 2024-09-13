@@ -35,9 +35,9 @@ public class GameManager : MonoBehaviour
     public float explosionRadius = 1f;
     public float explosionDuration = 2f;
     public int killCount = 0;
-    [HideInInspector] public bool playerHasDied = false;
+    public bool playerHasDied = false;
 
-    [SerializeField] private GameObject gameOverCanvas;
+    public GameObject gameOverCanvas;
     [SerializeField] private GameObject killCountOverlay;
 
     private float startTime = 0;
@@ -70,16 +70,16 @@ public class GameManager : MonoBehaviour
     {
         if (gameOverCanvas != null)
         {
+            playerHasDied = true;
             gameOverCanvas.SetActive(true);
-            gameOverCanvas.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = killCount.ToString();
+            gameOverCanvas.transform.GetChild(0).GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = killCount.ToString();
             
             float totalTime = Time.time - startTime;
             string mins = ((int)totalTime / 60).ToString("00");
             string segs = (totalTime % 60).ToString("00");
             string TimerString = string.Format("{00}:{01}", mins, segs);
 
-            gameOverCanvas.transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>().text = TimerString;
-            //Time.timeScale = 0f;
+            gameOverCanvas.transform.GetChild(0).GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>().text = TimerString;
         }
     }
 
