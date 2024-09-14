@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverCanvas;
     [SerializeField] private GameObject killCountOverlay;
+    [SerializeField] private GameObject timeOverlay;
 
     private float startTime = 0;
     private DefaultControlls inputActions;
@@ -56,6 +57,16 @@ public class GameManager : MonoBehaviour
         if (killCountOverlay != null)
         {
             killCountOverlay.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("Kills: {0000}", killCount);
+        }
+
+        if (timeOverlay != null)
+        {
+            float totalTime = Time.time - startTime;
+            string mins = ((int)totalTime / 60).ToString("00");
+            string segs = (totalTime % 60).ToString("00");
+            string TimerString = string.Format("{00}:{01}", mins, segs);
+
+            timeOverlay.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = TimerString;
         }
     }
 
