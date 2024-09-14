@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public float explosionDuration = 2f;
     public int killCount = 0;
     public bool playerHasDied = false;
-
+    public bool guiActivated = false;
     public GameObject gameOverCanvas;
     [SerializeField] private GameObject killCountOverlay;
 

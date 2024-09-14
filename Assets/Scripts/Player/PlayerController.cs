@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
             playerHealth = instanceLifes;
         }
 
-        if (!GameManager.Instance.playerHasDied)
+        if (!GameManager.Instance.playerHasDied && !GameManager.Instance.guiActivated)
         {
             Move();
             Rotate();
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     #region Abilities
     private void Shoot(InputAction.CallbackContext action)
     {
-        if (canShoot && !GameManager.Instance.playerHasDied)
+        if (canShoot && !GameManager.Instance.playerHasDied && !GameManager.Instance.guiActivated)
         {
             GameObject bullet = Instantiate(bulletPrefab);
             bullet.transform.position = shootPoint.position;

@@ -29,6 +29,7 @@ public class Game_Gui : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             showGUI = !showGUI;
+            GameManager.Instance.guiActivated = true;
         }
     }
 
@@ -36,6 +37,7 @@ public class Game_Gui : MonoBehaviour
     {
         if (showGUI)
         {
+            Time.timeScale = 0f;
             // Panel de Configuración
             GUI.Box(new Rect(10, 10, 270, 200), "Configuración del Juego");
 
@@ -75,6 +77,11 @@ public class Game_Gui : MonoBehaviour
             explosionDurationText = GUI.TextField(new Rect(150, 220, 70, 20), explosionDurationText);
             float.TryParse(explosionDurationText, out float explosionDuration);
             GameManager.Instance.explosionDuration = explosionDuration;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            GameManager.Instance.guiActivated = false;
         }
     }
 

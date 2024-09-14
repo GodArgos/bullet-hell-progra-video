@@ -19,15 +19,10 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Agregar una kill al puntaje total
-
-            //
-            GameManager.Instance.killCount++;
-            // Obtener el script de explosi�n del enemigo
-
             if (collision.gameObject.TryGetComponent(out CircleEnemy scriptC))
             {
                 scriptC.EnemyDestroy();
+                GameManager.Instance.killCount++;
             }
             else if(collision.gameObject.TryGetComponent(out DiamondEnemy scriptD))
             {
@@ -36,10 +31,12 @@ public class BulletBehaviour : MonoBehaviour
             else if (collision.gameObject.TryGetComponent(out CylinderEnemy scriptCy))
             {
                 scriptCy.EnemyDestroy();
+                GameManager.Instance.killCount++;
             }
             else if (collision.gameObject.TryGetComponent(out BossEnemy scriptB))
             {
                 scriptB.EnemyDestroy();
+                GameManager.Instance.killCount += 2;
             }
             else
             {
