@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -29,7 +30,10 @@ public class PlayerController : MonoBehaviour
     private int instanceLifes;
 
     // Events
-    public UnityEvent onHealthChanged;
+    [HideInInspector] public UnityEvent onHealthChanged;
+
+    // UI
+    [SerializeField] private GameObject lifeCountOverlay;
 
     #region General Event Methods
     private void Awake()
@@ -63,6 +67,14 @@ public class PlayerController : MonoBehaviour
             Rotate();
             CheckShootAble();
         } 
+    }
+
+    private void LateUpdate()
+    {
+        if (lifeCountOverlay != null)
+        {
+            lifeCountOverlay.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("HP: {0000}", playerHealth);
+        }
     }
 
     #endregion
